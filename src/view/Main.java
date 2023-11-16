@@ -5,20 +5,35 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
 
-        ImageIcon imageIcon = new ImageIcon("icone.png");
+        //ImageIcon imageIcon = new ImageIcon("icone.png");
 
-//        JOptionPane.showMessageDialog(null,
-//                "Hello World!", "Mensagem do sistema",
-//                JOptionPane.PLAIN_MESSAGE, imageIcon);
+       JOptionPane.showMessageDialog(null,
+               "Bem Vindo", "Mensagem do sistema",
+               JOptionPane.INFORMATION_MESSAGE);
 
-//        String nomes[] = {"João", "Maria", "Pedro", "Ana"};
-//
-//        String nome = (String) JOptionPane.showInputDialog(null,
-//                "Informe seu nome:", "Entrada de dados",
-//                JOptionPane.QUESTION_MESSAGE, null,nomes,
-//                nomes[0]);
-//        JOptionPane.showMessageDialog(null,
-//                "Bem vindo, "+nome);
+        
+        
+        Object[] opcoes = {"Cadastrar Usuário", "Acessar Usuario"};
+        
+        int escolha = JOptionPane.showOptionDialog(null, "O que deseja fazer ?", "Sistema",JOptionPane.DEFAULT_OPTION,
+        JOptionPane.INFORMATION_MESSAGE,
+        null,
+        opcoes,
+        opcoes[0]);
+
+        if(escolha == 0){
+            String nome = (String) JOptionPane.showInputDialog("Digite seu nome:");
+            String senha = (String) JOptionPane.showInputDialog("Digite sua senha:");
+            // Falta Criar o usuário!!!!
+        }
+
+        if (escolha == 1){
+            // egar input do usuario e senha, verificar se está cadastrado e mostrar opções para CRUD dos contatos!!
+        }
+
+       
+
+       
 
         int retorno = JOptionPane.showConfirmDialog(null,
                 "Deseja continuar?", "Mensagem do sistema",
