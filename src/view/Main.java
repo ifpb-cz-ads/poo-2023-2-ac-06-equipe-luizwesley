@@ -40,16 +40,14 @@ public class Main {
                 JOptionPane.YES_NO_OPTION);
 
         if(retorno == JOptionPane.YES_OPTION){
-            JOptionPane.showMessageDialog(null,
-                    "Escolheu sim");
+            // Voltar para opções de crud
         }
         if(retorno == JOptionPane.NO_OPTION){
-            JOptionPane.showMessageDialog(null,
-                    "Escolheu não");
+            // Voltar para antes de acessar usuário (linha 18)
         }
         if(retorno == JOptionPane.CLOSED_OPTION){
             JOptionPane.showMessageDialog(null,
-                    "Fechou");
+                    "Obrigado");
         }
 
     }
