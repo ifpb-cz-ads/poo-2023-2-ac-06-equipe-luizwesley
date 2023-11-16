@@ -1,5 +1,7 @@
 package view;
 
+import java.util.List;
+
 import javax.swing.*;
 
 import dao.UsuarioDao;
@@ -8,55 +10,67 @@ import model.Usuario;
 public class Main {
     public static void main(String[] args) {
 
+        JOptionPane.showMessageDialog(null,
+        "Bem Vindo", "Mensagem do sistema",
+        JOptionPane.INFORMATION_MESSAGE);
         
-
-       JOptionPane.showMessageDialog(null,
-               "Bem Vindo", "Mensagem do sistema",
-               JOptionPane.INFORMATION_MESSAGE);
-
-        
-        
-        Object[] opcoes = {"Cadastrar Usuário", "Acessar Usuario"};
-        
-        int escolha = JOptionPane.showOptionDialog(null, "O que deseja fazer ?", "Sistema",JOptionPane.DEFAULT_OPTION,
-        JOptionPane.INFORMATION_MESSAGE,
-        null,
-        opcoes,
-        opcoes[0]);
-
-        if(escolha == 0){
-            String email = (String) JOptionPane.showInputDialog("Digite seu email:");
-            String senha = (String) JOptionPane.showInputDialog("Digite sua senha:");
+        while(true){
             UsuarioDao dao = new UsuarioDao();
-            if (dao.addUsuario(new Usuario(email, senha))) {
-                System.out.println("Salvo com sucesso!");
-            } else {
-                System.out.println("Falha ao salvar!");
-        }
+            Object[] opcoes = {"Listar Usuários","Cadastrar Usuário", "Acessar Usuário"};      
+            int escolha = Menu.show(opcoes);
 
-        if (escolha == 1){
-            // Pegar input do usuario e senha, verificar se está cadastrado e mostrar opções para CRUD dos contatos!!
-        }
+            if(escolha == 0){
+                List<Usuario> usuarios = dao.listarUsuarios();
+                JOptionPane.showMessageDialog(null,
+                usuarios, "Mensagem do sistema",
+                JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if(escolha == 1){
+                String mensagem;
+                String email = (String) JOptionPane.showInputDialog("Digite seu email:");
+                String senha = (String) JOptionPane.showInputDialog("Digite sua senha:");
+                if (dao.addUsuario(new Usuario(email, senha))) {
+                    mensagem = "Salvo com sucesso!";
+                } else {
+                    mensagem = "Falha ao salvar!";
+                }
+                JOptionPane.showMessageDialog(null,
+                mensagem, "Mensagem do sistema",
+                JOptionPane.INFORMATION_MESSAGE);
+            }
 
-       
-
-       
-
-        int retorno = JOptionPane.showConfirmDialog(null,
+            else if (escolha == 2){
+                String email = (String) JOptionPane.showInputDialog("Digite o email do usuário que você deseja acessar:");
+                Usuario usuario = dao.buscarPorEmail(email);
+                if(usuario != null){
+                    JOptionPane.showMessageDialog(null,
+                    usuario, "Resultado",
+                    JOptionPane.INFORMATION_MESSAGE);
+                    
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,
+                    "Usuário não encontrado!", "Mensagem do sistema",
+                    JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else if(escolha == -1){
+                break;
+            }
+            int retorno = JOptionPane.showConfirmDialog(null,
                 "Deseja continuar?", "Mensagem do sistema",
                 JOptionPane.YES_NO_OPTION);
 
-        if(retorno == JOptionPane.YES_OPTION){
-            // Voltar para opções de crud
+            if(retorno == JOptionPane.YES_OPTION){
+                
+            }
+            if(retorno == JOptionPane.NO_OPTION ||
+                retorno == JOptionPane.CLOSED_OPTION){
+                JOptionPane.showMessageDialog(null,"Obrigado",
+                "Mensagem do Sistema",
+                JOptionPane.INFORMATION_MESSAGE); 
+                break;              
+            }
         }
-        if(retorno == JOptionPane.NO_OPTION){
-            // Voltar para antes de acessar usuário (linha 18)
-        }
-        if(retorno == JOptionPane.CLOSED_OPTION){
-            JOptionPane.showMessageDialog(null,
-                    "Obrigado");
-        }
-
     }
-}
 }

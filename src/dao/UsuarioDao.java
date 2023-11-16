@@ -75,11 +75,11 @@ public class UsuarioDao {
 
     public Usuario buscarPorEmail(String email){
         List<Usuario> usuarios = listarUsuarios();
-        for(Usuario usuario : usuarios){
-            if(usuario.getEmail().equals(email)){
-                return usuario;
+            for(Usuario usuario : usuarios){
+                if(usuario.getEmail().equals(email)){
+                    return usuario;
+                }
             }
-        }
         return null;
     }
 

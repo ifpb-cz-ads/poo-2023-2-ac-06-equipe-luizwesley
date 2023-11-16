@@ -55,6 +55,6 @@ public class Usuario implements Serializable {
                 "email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
                 ", agenda=" + agenda +
-                '}';
+                '}' + '\n';
     }
 }
