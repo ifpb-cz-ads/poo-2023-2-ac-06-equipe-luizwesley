@@ -2,10 +2,13 @@ package view;
 
 import javax.swing.*;
 
+import dao.UsuarioDao;
+import model.Usuario;
+
 public class Main {
     public static void main(String[] args) {
 
-        //ImageIcon imageIcon = new ImageIcon("icone.png");
+        
 
        JOptionPane.showMessageDialog(null,
                "Bem Vindo", "Mensagem do sistema",
@@ -22,13 +25,17 @@ public class Main {
         opcoes[0]);
 
         if(escolha == 0){
-            String nome = (String) JOptionPane.showInputDialog("Digite seu nome:");
+            String email = (String) JOptionPane.showInputDialog("Digite seu email:");
             String senha = (String) JOptionPane.showInputDialog("Digite sua senha:");
-            // Falta Criar o usuário!!!!
+            UsuarioDao dao = new UsuarioDao();
+            if (dao.addUsuario(new Usuario(email, senha))) {
+                System.out.println("Salvo com sucesso!");
+            } else {
+                System.out.println("Falha ao salvar!");
         }
 
         if (escolha == 1){
-            // egar input do usuario e senha, verificar se está cadastrado e mostrar opções para CRUD dos contatos!!
+            // Pegar input do usuario e senha, verificar se está cadastrado e mostrar opções para CRUD dos contatos!!
         }
 
        
@@ -51,4 +58,5 @@ public class Main {
         }
 
     }
+}
 }
